@@ -101,6 +101,11 @@ int main(void)
   status = xTaskCreate(task2_handler, "Task-2", 200, "Hello world from Task-2", 2, &task2_handle);
   configASSERT(status == pdPASS);
 
+  vTaskStartScheduler();
+
+  // Above `vTaskStartScedular` never returns, if it does then the launch of sceduler
+  //  has been failed due to insufficient memory in the heap
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -305,12 +310,18 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 static void task1_handler(void* parameters)
 {
-
+  while (1)
+  {
+	printf("%s\n", (char*)parameters);
+  }
 }
 
 static void task2_handler(void* parameters)
 {
-
+  while (1)
+  {
+	printf("%s\n", (char*)parameters);
+  }
 }
 /* USER CODE END 4 */
 
