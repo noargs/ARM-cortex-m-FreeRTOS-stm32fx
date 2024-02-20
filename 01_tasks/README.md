@@ -10,7 +10,7 @@ of equal priorities to print the message `'hello world from Task-x'`
 		
 <img src="images/task_ready.png" alt="Task Ready FreeRTOS kernel list" title="Task Ready FreeRTOS kernel list">  			 
     
-### Create a task    
+## Create a task    
      
 <img src="images/task_create.png" alt="Task Create FreeRTOS Function API" title="Task Create FreeRTOS Function API">     
      
