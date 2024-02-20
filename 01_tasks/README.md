@@ -88,6 +88,14 @@ of equal priorities to print the message `'hello world from Task-x'`
      
 <img src="images/systemview_integration4.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
      
+<img src="images/systemview_integration5.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
+     
+<img src="images/systemview_integration6.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
+     
+<img src="images/systemview_integration7.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
+     
+<img src="images/systemview_integration8.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
+     
      		 
      
      	
