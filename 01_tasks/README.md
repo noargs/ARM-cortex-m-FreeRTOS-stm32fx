@@ -94,7 +94,30 @@ of equal priorities to print the message `'hello world from Task-x'`
      
 <img src="images/systemview_integration7.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
      
-<img src="images/systemview_integration8.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
+<img src="images/systemview_integration8.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	  	 
+     
+<img src="images/systemview_integration9.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">   
+    
+		
+> Run the `01_tasks` app in Debug mode, Hit `Resume` Button on IDE and then `Suspend` button after 2 seconds and will see following screen.
+  	 
+     
+<img src="images/systemview_integration10.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">
+ 
+    
+		
+> Write `SEGGER_RTT` in _Expressions_ window and go to `aUP[1] > pBuffer`, copy the address and paste it in `Memory Browser` window, click `binary icon` button and enter the values shown below and save the file with `.SVdat` extension
+  	 
+     
+<img src="images/systemview_integration11.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">
+ 
+    
+		
+> Finally open the file with `.SVdat` extension in SEGGER's SystemView
+  	 
+     
+<img src="images/systemview_integration11.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">
+				
      
      		 
      

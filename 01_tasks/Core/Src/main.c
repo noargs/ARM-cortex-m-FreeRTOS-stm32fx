@@ -101,6 +101,10 @@ int main(void)
   DWT_CTRL |= (1 << 0);
 
   SEGGER_SYSVIEW_Conf();
+
+  // `vInitPrioGroupValue()` Priority grouping init must be done for
+  //   below function in `msp.c` otherwise it couldve done by the
+  //   scheduler `vTaskStartScheduler()`
   SEGGER_SYSVIEW_Start();
 
   status = xTaskCreate(task1_handler, "Task-1", 200, "Hello world from Task-1", 2, &task1_handle);
@@ -321,7 +325,7 @@ static void task1_handler(void* parameters)
   while (1)
   {
 	printf("%s\n", (char*)parameters);
-	taskYIELD();
+//	taskYIELD();
   }
 }
 
@@ -330,7 +334,7 @@ static void task2_handler(void* parameters)
   while (1)
   {
 	printf("%s\n", (char*)parameters);
-	taskYIELD();
+//	taskYIELD();
   }
 }
 /* USER CODE END 4 */
