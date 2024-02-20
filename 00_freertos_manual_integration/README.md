@@ -27,7 +27,10 @@
      
 * Our project layer will look like as following without CMSIS-RTOS Layer
      
-<img src="images/our_project_workflow.png" alt="Our Project workflow without CMSIS-RTOS layer" title="Our Project workflow without CMSIS-RTOS layer"> 			 		 			 	
+<img src="images/our_project_workflow.png" alt="Our Project workflow without CMSIS-RTOS layer" title="Our Project workflow without CMSIS-RTOS layer">    
+       
+     
+<img src="images/timebase.png" alt="Time base source selection" title="Time base source selection">  		 			  			 		 			 	
 
 
 
