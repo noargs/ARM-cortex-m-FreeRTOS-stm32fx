@@ -76,6 +76,19 @@ of equal priorities to print the message `'hello world from Task-x'`
 <img src="images/segger_recording3.png" alt="SEGGER SystemView Visualisation modes  " title="SEGGER SystemView Visualisation modes">  	 
      
 <img src="images/segger_recording4.png" alt="SEGGER SystemView Visualisation modes  " title="SEGGER SystemView Visualisation modes">  	
+    
+		
+## SEGGER SystemView Integration  
+     
+<img src="images/systemview_integration1.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
+     
+<img src="images/systemview_integration2.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
+     
+<img src="images/systemview_integration3.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
+     
+<img src="images/systemview_integration4.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">  	 
+     
+     		 
      
      	
      	
