@@ -322,19 +322,37 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 static void task1_handler(void* parameters)
 {
+  char msg[100];
   while (1)
   {
-	printf("%s\n", (char*)parameters);
-//	taskYIELD();
+	// use SEGGER_RTT_Syscalls_GCC.c's `_write()` instead of
+	// syscalls.c's `__attribute__((weak)) int _write()` as it is
+	// attributed as week
+//	printf("%s\n", (char*)parameters);
+
+	// Alternatively use `SEGGER_SYSVIEW_PrintfTarget()` to get the
+	// output in SystemView as well (in SystemView's Terminal window)
+	snprintf(msg, 100, "%s\n", (char*)parameters);
+	SEGGER_SYSVIEW_PrintfTarget(msg);
+	taskYIELD();
   }
 }
 
 static void task2_handler(void* parameters)
 {
+  char msg[100];
   while (1)
   {
-	printf("%s\n", (char*)parameters);
-//	taskYIELD();
+	// use SEGGER_RTT_Syscalls_GCC.c's `_write()` instead of
+	// syscalls.c's `__attribute__((weak)) int _write()` as it is
+	// attributed as week
+//	printf("%s\n", (char*)parameters);
+
+	// Alternatively use `SEGGER_SYSVIEW_PrintfTarget()` to get the
+	// output in SystemView as well (in SystemView's Terminal window)
+	snprintf(msg, 100, "%s\n", (char*)parameters);
+	SEGGER_SYSVIEW_PrintfTarget(msg);
+	taskYIELD();
   }
 }
 /* USER CODE END 4 */
