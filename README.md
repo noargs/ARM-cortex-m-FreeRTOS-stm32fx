@@ -110,7 +110,7 @@ This application implements multiple tasks.
      
 <img src="images/multitask_app.png" alt="Multitask application" title="Multitask application">   		 
      
-> A task means just think like a piece of code, which can run on CPU and execute.    	
+> A task means a piece of code, which can run on CPU and execute.    	
      
 <img src="images/multitask_app2.png" alt="Multitask application" title="Multitask application">  
      
@@ -120,7 +120,7 @@ Let’s say we have a processor with four cores as shown below. In this case, we
 <img src="images/multitask_app3.png" alt="Multitask application" title="Multitask application">  
     
 		
-However in the embedded world, we don’t usually use a processor which has got multiple cores. We have one core and multiple task scenario. And To run all these tasks, you will need a scheduler, and it will decide which task should take the CPU next		
+However in the embedded world, we don’t usually use a processor with multiple cores. Instead we have one core and multiple tasks. And To run all these tasks, you will need a scheduler, and it will decide which task should take the CPU next		
      
 <img src="images/multitask_app4.png" alt="Multitask application" title="Multitask application">  
     
