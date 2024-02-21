@@ -131,7 +131,30 @@ of equal priorities to print the message `'hello world from Task-x'`
 <img src="images/idle_task4.png" alt="IDLE Task" title="IDLE Task">     
   	 
      
-<img src="images/idle_task5.png" alt="IDLE Task" title="IDLE Task">     
+<img src="images/idle_task5.png" alt="IDLE Task" title="IDLE Task">      
+  	 
+     
+<img src="images/freertos_sche.png" alt="IDLE Task" title="IDLE Task">     
+  	 
+     
+<img src="images/freertos_sche2.png" alt="IDLE Task" title="IDLE Task">      
+  	 
+     
+<img src="images/freertos_sche3.png" alt="IDLE Task" title="IDLE Task">       
+  	 
+     
+<img src="images/freertos_sche4.png" alt="IDLE Task" title="IDLE Task">       
+  	 
+     
+<img src="images/freertos_sche5.png" alt="IDLE Task" title="IDLE Task">     
+				
+     
+				
+      
+				
+       
+				
+      
 				
      
 				
