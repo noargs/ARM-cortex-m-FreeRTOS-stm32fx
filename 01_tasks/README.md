@@ -116,7 +116,31 @@ of equal priorities to print the message `'hello world from Task-x'`
 > Finally open the file with `.SVdat` extension in SEGGER's SystemView
   	 
      
-<img src="images/systemview_integration12.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">
+<img src="images/systemview_integration12.png" alt="SEGGER SystemView Integration Steps" title="SEGGER SystemView Integration Steps">    
+  	 
+     
+<img src="images/idle_task.png" alt="IDLE Task" title="IDLE Task">     
+  	 
+     
+<img src="images/idle_task2.png" alt="IDLE Task" title="IDLE Task">     
+  	 
+     
+<img src="images/idle_task3.png" alt="IDLE Task" title="IDLE Task">    
+  	 
+     
+<img src="images/idle_task4.png" alt="IDLE Task" title="IDLE Task">     
+  	 
+     
+<img src="images/idle_task5.png" alt="IDLE Task" title="IDLE Task">     
+				
+     
+				
+      
+				
+     
+				
+     
+     
 				
      
      		 
