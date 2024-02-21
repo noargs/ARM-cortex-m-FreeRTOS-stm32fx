@@ -71,6 +71,12 @@ For example, the airbag triggering mechanism in a car is an example of **hard re
 <img src="images/rtos_task_sched.png" alt="GPOS Task Scheduling" title="RTOS Task Scheduling">   
 		 
 <img src="images/rtosvsgpos_tasksched.png" alt="RTOS vs GPOS Task Scheduling" title="RTOS vs GPOS Task Scheduling">    
+		 
+<img src="images/latency.png" alt="RTOS vs GPOS Interrupt latency" title="RTOS vs GPOS Interrupt latency">  
+		 
+<img src="images/latency2.png" alt="RTOS vs GPOS Interrupt latency" title="RTOS vs GPOS Interrupt latency">  
+		 
+<img src="images/latency3.png" alt="RTOS vs GPOS Interrupt latency" title="RTOS vs GPOS Interrupt latency">  
      
 		 
 		 
