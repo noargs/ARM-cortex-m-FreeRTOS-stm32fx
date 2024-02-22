@@ -146,7 +146,17 @@ of equal priorities to print the message `'hello world from Task-x'`
 <img src="images/freertos_sche4.png" alt="IDLE Task" title="IDLE Task">       
   	 
      
-<img src="images/freertos_sche5.png" alt="IDLE Task" title="IDLE Task">     
+<img src="images/freertos_sche5.png" alt="IDLE Task" title="IDLE Task">    
+    
+		
+<img src="images/freertos_kernel_interrupts.png" alt="FreeRTOS Kernel Innterrupts" title="FreeRTOS Kernel Innterrupts">   	    
+    
+		
+<img src="images/rtos_tick.png" alt="RTOS Tick" title="RTOS Tick">  	   
+    
+		
+<img src="images/rtos_tick2.png" alt="RTOS Tick" title="RTOS Tick">  	   
+				
 				
      
 				
