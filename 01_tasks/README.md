@@ -177,9 +177,15 @@ of equal priorities to print the message `'hello world from Task-x'`
     
 		
 <img src="images/context_switching.png" alt="Context Switching" title="Context Switching">  	      
-    
-		
-<img src="images/context_switching2.png" alt="Context Switching" title="Context Switching">  	   
+<img src="images/context_switching2.png" alt="Context Switching" title="Context Switching">  	   	      
+<img src="images/task_state.png" alt="Task State" title="Task State">  
+     
+		 
+<img src="images/task_state2.png" alt="Task State" title="Task State">  	   
+				  
+				
+				  
+				
 				  
 				
 				  
