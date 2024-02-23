@@ -155,7 +155,32 @@ of equal priorities to print the message `'hello world from Task-x'`
 <img src="images/rtos_tick.png" alt="RTOS Tick" title="RTOS Tick">  	   
     
 		
-<img src="images/rtos_tick2.png" alt="RTOS Tick" title="RTOS Tick">  	   
+<img src="images/rtos_tick2.png" alt="RTOS Tick" title="RTOS Tick">  	     
+    
+		
+<img src="images/rtos_tick3.png" alt="RTOS Tick" title="RTOS Tick">  	   
+    
+		
+<img src="images/rtos_tick4.png" alt="RTOS Tick" title="RTOS Tick">  	       
+    
+		
+<img src="images/rtos_tick5.png" alt="RTOS Tick" title="RTOS Tick">  	   
+    
+		
+<img src="images/rtos_tick6.png" alt="RTOS Tick" title="RTOS Tick">  	     
+    
+		
+<img src="images/rtos_tick7.png" alt="RTOS Tick" title="RTOS Tick">  	      
+    
+		
+<img src="images/rtos_tick8.png" alt="RTOS Tick" title="RTOS Tick">  	   
+				  
+				
+				  
+				
+				
+				
+				  
 				
 				
      
