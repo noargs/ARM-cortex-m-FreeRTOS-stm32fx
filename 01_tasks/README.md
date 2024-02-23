@@ -173,7 +173,13 @@ of equal priorities to print the message `'hello world from Task-x'`
 <img src="images/rtos_tick7.png" alt="RTOS Tick" title="RTOS Tick">  	      
     
 		
-<img src="images/rtos_tick8.png" alt="RTOS Tick" title="RTOS Tick">  	   
+<img src="images/rtos_tick8.png" alt="RTOS Tick" title="RTOS Tick">  	 	     
+    
+		
+<img src="images/context_switching.png" alt="Context Switching" title="Context Switching">  	      
+    
+		
+<img src="images/context_switching2.png" alt="Context Switching" title="Context Switching">  	   
 				  
 				
 				  
