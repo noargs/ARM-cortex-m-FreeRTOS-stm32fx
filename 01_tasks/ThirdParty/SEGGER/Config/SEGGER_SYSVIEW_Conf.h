@@ -79,6 +79,7 @@ Additional information:
 **********************************************************************
 */
 
+#define SEGGER_UART_REC 1
 
 #endif  // SEGGER_SYSVIEW_CONF_H
 
