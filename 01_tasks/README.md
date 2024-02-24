@@ -187,13 +187,26 @@ of equal priorities to print the message `'hello world from Task-x'`
 <img src="images/task_switchingout.png" alt="Task switching out" title="Task switching out">  	  
      
 		 
-<img src="images/task_switchingout2.gif" alt="Task switching out" title="Task switching out">  	   
+<img src="images/task_switchingout2.gif" alt="Task switching out" title="Task switching out">  	  
+     
+		 
+<img src="images/task_switchingin.png" alt="Task switching In" title="Task switching In">  	    
+     
+		 
+<img src="images/task_switchingin2.gif" alt="Task switching In" title="Task switching In">  	   
+     
+		 
+<img src="images/task_switchingin3.gif" alt="Task switching Assembly Overview" title="Task switching Assembly Overview">  	   
+				  
+				     
+				  
+				  
+				       
 				  
 				    
 				  
 				   
-				 
-				  
+
 				
 				  
 				
