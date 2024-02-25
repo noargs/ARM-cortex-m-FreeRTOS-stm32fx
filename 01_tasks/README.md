@@ -205,7 +205,22 @@ of equal priorities to print the message `'hello world from Task-x'`
 <img src="images/cont_rec2.png" alt="Continuous recording (Real time)" title="Continuous recording (Real time)">  	   
      
 		 
-<img src="images/cont_rec3.png" alt="Continuous recording (Real time)" title="Continuous recording (Real time)">  	   
+<img src="images/cont_rec3.png" alt="Continuous recording (Real time)" title="Continuous recording (Real time)">  	  
+     
+		 
+> Now, go to CUBEMx `01_tasks.ioc > Clock Configuration` and set the clock to Maximum allowed for STM32F407 which is HCLK (168Mhz), APB1 (42MHz), and APB2 (84MHz) as shown below.     
+     
+		 
+<img src="images/cont_rec4.png" alt="Continuous recording (Real time)" title="Continuous recording (Real time)">  	  
+     
+    
+	
+> Finally call `SEGGER_UART_init(500000)` with Baudrate as 500000 in `main.c`. We will use Co-operative scheduling therefore `configUSE_PREEMPTION` in `FreeRTOSConfig.h` should be **0**. Build/Debug the project into the MCU and Hit **Resume** to run the code. Now go to SystemView **Target** > **Recorder configuration**, Select **UART** from dropdown and give **COM Port** your USB-UART port name (as shown below) and **Speed (in Baud)** as `500000`. And lastly back to SystemView **Target** > **Start Recording**. 	   
+     
+		 
+<img src="images/cont_rec5.png" alt="Continuous recording (Real time)" title="Continuous recording (Real time)">  	  
+     
+    
 				  
 				        
 				  
