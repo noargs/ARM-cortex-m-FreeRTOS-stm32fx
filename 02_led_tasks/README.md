@@ -34,7 +34,32 @@ Spare the SysTick as a TimeBase for FreeRTOS **only** as CubeMx HAL also used it
 		 
 		 
 <img src="images/changes3.png" alt="Call vInitPrioGroupValue() from HAL_MspInit()" title="Call vInitPrioGroupValue() from HAL_MspInit()">    
+		 
+		 
+<img src="images/task_states.png" alt="High level overview of Task States" title="High level overview of Task States">    
+		 
+		 
+<img src="images/task_states2.png" alt="High level overview of Task States" title="High level overview of Task States">    
+		 
+		 
+<img src="images/task_states3.png" alt="High level overview of Task States" title="High level overview of Task States">    
+		 
+		 
+<img src="images/task_states4.png" alt="High level overview of Task States" title="High level overview of Task States">    
+		 
+		 
+<img src="images/task_states5.png" alt="High level overview of Task States" title="High level overview of Task States">    
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
     
     
     
