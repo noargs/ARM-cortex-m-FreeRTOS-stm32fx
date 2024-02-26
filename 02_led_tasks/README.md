@@ -21,7 +21,27 @@ There are 4 LEDs present on the board as shown below.
       
 For FreeRTOS to work with HAL layer, We have to make few changes.   
    
-Spare the SysTick as a TimeBase for FreeRTOS **only** as CubeMx HAL also used it. We can change the CubeMx HAL Timebase to any other timer i.e. TIMER6    
+Spare the SysTick as a TimeBase for FreeRTOS **only** as CubeMx HAL also used it. We can change the CubeMx HAL Timebase to any other timer i.e. TIMER6          
+		 
+		 
+<img src="images/changes.png" alt="Change HAL Timebase" title="Change HAL Timebase">         
+		 
+		 
+<img src="images/changes1.png" alt="Priority group settings, 4-bits pre-emption and 0 bits for subpriority" title="Priority group settings, 4-bits pre-emption and 0 bits for subpriority">    
+		 
+		 
+<img src="images/changes2.png" alt="Disable code generation of SysTick, SVC, and PendSV handlers" title="Disable code generation of SysTick, SVC, and PendSV handlers">     
+		 
+		 
+<img src="images/changes3.png" alt="Call vInitPrioGroupValue() from HAL_MspInit()" title="Call vInitPrioGroupValue() from HAL_MspInit()">    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
      
