@@ -14,6 +14,16 @@ There are 4 LEDs present on the board as shown below.
 		 
 		 
 <img src="images/outline.png" alt="Task outline" title="Task outline">    
+    
+    
+    
+## Incorporating FreeRTOS with HAL layer     
+      
+For FreeRTOS to work with HAL layer, We have to make few changes.   
+   
+Spare the SysTick as a TimeBase for FreeRTOS **only** as CubeMx HAL also used it. We can change the CubeMx HAL Timebase to any other timer i.e. TIMER6    
+    
+
      
      
 
