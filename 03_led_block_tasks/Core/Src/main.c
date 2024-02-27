@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "FreeRTOS.h"
+#include "task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define DWT_CTRL              (*(volatile uint32_t*)0xE0001000)
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,7 +50,11 @@
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
+static void led_green_handler(void* parameters);
+static void led_orange_handler(void* parameters);
+static void led_red_handler(void* parameters);
 
+extern void SEGGER_UART_init(uint32_t);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -64,7 +69,11 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+  TaskHandle_t task1_handle;
+  TaskHandle_t task2_handle;
+  TaskHandle_t task3_handle;
 
+  BaseType_t status;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -86,6 +95,28 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+
+  SEGGER_UART_init(250000);
+
+  // Enable the CYCCNT counter register - For SystemView Timestamp
+  // Cortex-M4 Techinal Reference Manual page: 91
+  DWT_CTRL |= (1 << 0);
+
+  SEGGER_SYSVIEW_Conf();
+
+  status = xTaskCreate(led_green_handler, "LED green task", 200, NULL, 2, &task1_handle);
+  configASSERT(status == pdPASS);
+
+  status = xTaskCreate(led_red_handler, "LED red task", 200, NULL, 2, &task2_handle);
+  configASSERT(status==pdPASS);
+
+  status = xTaskCreate(led_orange_handler, "LED orange task", 200, NULL, 2, &task3_handle);
+  configASSERT(status==pdPASS);
+
+  vTaskStartScheduler();
+
+
+
 
   /* USER CODE END 2 */
 
@@ -289,7 +320,35 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+static void led_green_handler(void* parameters)
+{
+  while (1)
+  {
+//	SEGGER_SYSVIEW_PrintfTarget("Toggling green LED");
+	HAL_GPIO_TogglePin(GPIOD, LED_GREEN_PIN);
+	vTaskDelay(pdMS_TO_TICKS(1000));
+  }
+}
 
+static void led_orange_handler(void* parameters)
+{
+  while (1)
+  {
+//	SEGGER_SYSVIEW_PrintfTarget("Toggling orange LED");
+	HAL_GPIO_TogglePin(GPIOD, LED_ORANGE_PIN);
+	vTaskDelay(pdMS_TO_TICKS(800));
+  }
+}
+
+static void led_red_handler(void* parameters)
+{
+  while (1)
+  {
+//	SEGGER_SYSVIEW_PrintfTarget("Toggling red LED");
+	HAL_GPIO_TogglePin(GPIOD, LED_RED_PIN);
+	vTaskDelay(pdMS_TO_TICKS(400));
+  }
+}
 /* USER CODE END 4 */
 
 /**

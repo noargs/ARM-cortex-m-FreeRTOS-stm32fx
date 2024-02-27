@@ -25,7 +25,7 @@
 		 
 ## Exercise   
      
-* Toogle 3 LEDs of the STM32F407 DISC board with the duration as shown in the below graph.    
+* Toggle 3 LEDs of the STM32F407 DISC board with the duration as shown in the below graph.    
     
 * Create 3 FreeRTOS tasks of the same priority to handle 3 different LEDs    
     
