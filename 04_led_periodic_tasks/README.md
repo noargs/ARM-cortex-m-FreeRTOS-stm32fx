@@ -1,4 +1,4 @@
-Find the explanation of **vTaskDelayUntil()** in the previous project's README (03_led_block_task)[https://github.com/noargs/ARM-cortex-m-FreeRTOS-stm32fx/tree/main/03_led_block_tasks#readme]     
+Find the explanation of **vTaskDelayUntil()** in the previous project's README [03_led_block_task](https://github.com/noargs/ARM-cortex-m-FreeRTOS-stm32fx/tree/main/03_led_block_tasks#readme)     
     
 		
 		
