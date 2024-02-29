@@ -98,11 +98,11 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
+  SEGGER_UART_init(500000);
+
   // Enable the CYCCNT counter register - For SystemView timestamp
   // Cortex-M4 Technical Reference Manual page: 91
   DWT_CTRL |= (1 << 0);
-
-  SEGGER_UART_init(500000);
 
   SEGGER_SYSVIEW_Conf();
 

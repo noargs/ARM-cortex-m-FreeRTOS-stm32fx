@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "FreeRTOS.h"
+#include "task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define DWT_CTRL             (*(volatile unit32_t*)0xE0001000);
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,7 +50,20 @@
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
+static void led_green_handler(void* parameters);
+static void led_orange_handler(void* parameters);
+static void led_red_handler(void* parameters);
+static void button_handler(void* parameters);
 
+extern void SEGGER_UART_init(uint32_t);
+
+// needs task handles to delete a task
+TaskHandle_t ledg_task_handle;
+TaskHandle_t ledo_task_handle;
+TaskHandle_t ledr_task_handle;
+TaskHandle_t button_task_handle;
+
+TaskHandle_t volatile next_task_handle = NULL;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -64,7 +78,7 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+  BaseType_t status;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -86,6 +100,32 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+
+  SEGGER_UART_init(250000);
+
+  // Enable the CYCCNT counter register - For SystemView timestamp
+  // Cortex-M4 Technical Reference Manual page: 91
+  DWT_CTRL |= (1 << 0);
+
+  SEGGER_SYSVIEW_Conf();
+
+  status = xTaskCreate(led_green_handler, "LED green task", 200, NULL, 3, &ledg_task_handle);
+  configASSERT(status==pdPASS);
+
+  next_task_handle = ledg_task_handle;
+
+  status = xTaskCreate(led_orange_handler, "LED orange task", 200, NULL, 2, &ledo_task_handle);
+  configASSERT(status==pdPASS);
+
+  status = xTaskCreate(led_red_handler, "LED red task", 200, NULL, 1, &ledr_task_handle);
+  configASSERT(status==pdPASS);
+
+  status = xTaskCreate(button_handler, "Button task", 200, NULL, 4, &button_task_handle);
+  configASSERT(status==pdPASS);
+
+  vTaskStartScheduler();
+
+
 
   /* USER CODE END 2 */
 
@@ -289,6 +329,97 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+static void led_green_handler(void* parameters)
+{
+  BaseType_t status;
+  while (1)
+  {
+	SEGGER_SYSVIEW_PrintfTarget("Toggling green LED");
+	HAL_GPIO_TogglePin(GPIOD, LED_GREEN_PIN);
+	xTaskNotifyWait(0, 0, NULL, pdMS_TO_TICKS(1000)); // 1 sec
+
+	if (status == pdTrue)
+	{
+	  // Suspends the scheduler to change `next_task_handle` global variable
+	  // consult README of this project
+	  vTaskSuspendAll();
+	  next_task_handle = ledo_task_handle;
+	  xTaskResumeAll();
+
+	  HAL_GPIO_WritePin(GPIOD, LED_GREEN_PIN, GPIO_PIN_SET);
+	  SEGGER_SYSVIEW_PrintfTarget("Delete green LED task");
+	  vTaskDelete(NULL);
+	}
+  }
+}
+
+static void led_orange_handler(void* parameters)
+{
+  BaseType_t status;
+  while (1)
+  {
+	SEGGER_SYSVIEW_PrintfTarget("Toggling orange LED");
+	HAL_GPIO_TogglePin(GPIOD, LED_ORANGE_PIN);
+	xTaskNotifyWait(0, 0, NULL, pdMS_TO_TICKS(800)); // 800ms
+
+	if (status == pdTrue)
+	{
+	  // Suspends the scheduler to change `next_task_handle` global variable
+	  // consult README of this project
+	  vTaskSuspendAll();
+	  next_task_handle = ledr_task_handle;
+	  xTaskResumeAll();
+
+	  HAL_GPIO_WritePin(GPIOD, LED_ORANGE_PIN, GPIO_PIN_SET);
+	  SEGGER_SYSVIEW_PrintfTarget("Delete orange LED task");
+	  vTaskDelete(NULL);
+	}
+  }
+}
+
+static void led_red_handler(void* parameters)
+{
+  BaseType_t status;
+  while (1)
+  {
+	SEGGER_SYSVIEW_PrintfTarget("Toggling red LED");
+	HAL_GPIO_TogglePin(GPIOD, LED_RED_PIN);
+	xTaskNotifyWait(0, 0, NULL, pdMS_TO_TICKS(400)); // 400ms
+
+	if (status == pdTrue)
+	{
+	  // Suspends the scheduler to change `next_task_handle` global variable
+	  // consult README of this project
+	  vTaskSuspendAll();
+	  next_task_handle = NULL;
+	  xTaskResumeAll();
+
+	  HAL_GPIO_WritePin(GPIOD, LED_RED_PIN, GPIO_PIN_SET);
+	  SEGGER_SYSVIEW_PrintfTarget("Delete red LED task");
+	  vTaskDelete(button_task_handle);
+	  vTaskDelete(NULL);
+	}
+  }
+}
+
+static void button_handler(void* parameters)
+{
+  uint8_t btn_read =0;
+  uint8_t prev_read =0;
+  while (1)
+  {
+	btn_read = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+	if (btn_read)
+	{
+	  if (!prev_read)
+	  {
+		xTaskNotify(next_task_handle, 0, eNoAction);
+	  }
+	  prev_read = btn_read;
+	  vTaskDelay(pdMS_TO_TICKS(10));
+	}
+  }
+}
 
 /* USER CODE END 4 */
 
