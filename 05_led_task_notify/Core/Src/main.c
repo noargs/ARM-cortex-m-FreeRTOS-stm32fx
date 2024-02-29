@@ -240,7 +240,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
@@ -405,8 +405,8 @@ static void led_red_handler(void* parameters)
 
 static void button_handler(void* parameters)
 {
-  uint8_t btn_read =0;
-  uint8_t prev_read =0;
+  uint8_t btn_read = 0;
+  uint8_t prev_read = 0;
   while (1)
   {
 	btn_read = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
@@ -416,9 +416,9 @@ static void button_handler(void* parameters)
 	  {
 		xTaskNotify(next_task_handle, 0, eNoAction);
 	  }
-	  prev_read = btn_read;
-	  vTaskDelay(pdMS_TO_TICKS(10));
 	}
+	prev_read = btn_read;
+    vTaskDelay(pdMS_TO_TICKS(10));
   }
 }
 
