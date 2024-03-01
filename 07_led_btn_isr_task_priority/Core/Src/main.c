@@ -43,7 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+volatile BaseType_t status_button =0;  // modify by button interrupt handler
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -52,16 +52,14 @@ static void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN PFP */
 
-static void led_green_handler(void* parameters);
-static void led_orange_handler(void* parameters);
-static void led_red_handler(void* parameters);
+static void task1_handler(void* parameters);
+static void task2_handler(void* parameters);
 
 extern void SEGGER_UART_init(uint32_t);
 
 // needs task handles to delete a task
-TaskHandle_t ledg_task_handle;
-TaskHandle_t ledo_task_handle;
-TaskHandle_t ledr_task_handle;
+TaskHandle_t task1_handle;
+TaskHandle_t task2_handle;
 TaskHandle_t button_task_handle;
 
 TaskHandle_t volatile next_task_handle = NULL;
@@ -110,15 +108,12 @@ int main(void)
 
   SEGGER_SYSVIEW_Conf();
 
-  status = xTaskCreate(led_green_handler, "LED green task", 200, NULL, 3, &ledg_task_handle);
+  status = xTaskCreate(task1_handler, "Task-1", 200, NULL, 2, &task1_handle);
   configASSERT(status==pdPASS);
 
-  next_task_handle = ledg_task_handle;
+  next_task_handle = task1_handle;
 
-  status = xTaskCreate(led_orange_handler, "LED orange task", 200, NULL, 2, &ledo_task_handle);
-  configASSERT(status==pdPASS);
-
-  status = xTaskCreate(led_red_handler, "LED red task", 200, NULL, 1, &ledr_task_handle);
+  status = xTaskCreate(task2_handler, "Task-2", 200, NULL, 3, &task2_handle);
   configASSERT(status==pdPASS);
 
   vTaskStartScheduler();
@@ -334,93 +329,70 @@ static void MX_GPIO_Init(void)
 
 void button_interrupt_handler(void)
 {
-  BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
-
   // help SEGGER SystemView to detect the Entry to an interrupt
   //   otherwise SEGGER SystemView will have no idea that there
   //   was an execution of interrupt handler
   traceISR_ENTER();
-
-//  xTaskNotifyFromISR(next_task_handle, 0, eNoAction, NULL);
-  xTaskNotifyFromISR(next_task_handle, 0, eNoAction, &pxHigherPriorityTaskWoken);
-
-  // once the ISR exits, the below macro makes higher priority
-  //   task which got unblocked to resume on the CPU
-  portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+  status_button =1;
   traceISR_EXIT();
 }
 
-static void led_green_handler(void* parameters)
+void switch_priority(void)
 {
-  BaseType_t status;
-  while (1)
-  {
-	SEGGER_SYSVIEW_PrintfTarget("Toggling green LED");
-	HAL_GPIO_TogglePin(GPIOD, LED_GREEN_PIN);
-	status = xTaskNotifyWait(0, 0, NULL, pdMS_TO_TICKS(1000)); // 1 sec
+  UBaseType_t p1, p2;
+  xTaskHandle t1,t2,curr;
 
-	if (status == pdTRUE)
+  BaseType_t switch_priority =0;
+
+  portENTER_CRITICAL();
+  if (status_button)
+  {
+	status_button =0;
+	switch_priority =1;
+  }
+  portEXIT_CRITICAL();
+  if (switch_priority)
+  {
+	t1 = xTaskGetHandle("Task-1");
+	t2 = xTaskGetHandle("Task-2");
+
+	p1 = uxTaskPriorityGet(t1);
+	p2 = uxTaskPriorityGet(t2);
+
+	curr = xTaskGetCurrentTaskHandle();
+
+	if (curr == t1)
 	{
-	  // cannot use `vTaskSuspendAll()` here now as `next_task_hanle` is shared
-	  //   between Interrupt handler `button_interrupt_handler(void)`
-	  //
-	  // whenever you have a critical section (i.e. where global variable is accessed
-	  //   which is shared between multiple tasks and interrupt handler)
-	  //   There you can disable the interrupts of the system, okay for short duration
-	  //   but not recommended to disable interrupts for longer duration, In that case
-	  //   you can switch to mutex or semaphores for synchronisation between different
-	  //   tasks and interrupt handler
-	  //   it also disable the PendSV (prority 0xf0), only interrupts with less than 0x50 (high
-	  //   priority urgeny interrupts) are allowed but not greater than 0x50 (low urgency low priority)
-	  portENTER_CRITICAL();
-	  next_task_handle = ledo_task_handle;
-	  HAL_GPIO_WritePin(GPIOD, LED_GREEN_PIN, GPIO_PIN_SET);
-	  SEGGER_SYSVIEW_PrintfTarget("Delete green LED task");
-	  portEXIT_CRITICAL();
-	  vTaskDelete(NULL);
+	  vTaskPrioritySet(t1, p2);
+	  vTaskPrioritySet(t2, p1);
+	}
+	else
+	{
+	  vTaskPrioritySet(t2, p1);
+	  vTaskPrioritySet(t1, p2);
 	}
   }
 }
 
-static void led_orange_handler(void* parameters)
+static void task1_handler(void* parameters)
 {
-  BaseType_t status;
   while (1)
   {
-	SEGGER_SYSVIEW_PrintfTarget("Toggling orange LED");
-	HAL_GPIO_TogglePin(GPIOD, LED_ORANGE_PIN);
-	status = xTaskNotifyWait(0, 0, NULL, pdMS_TO_TICKS(800)); // 800ms
-
-	if (status == pdTRUE)
-	{
-	  portENTER_CRITICAL();
-	  next_task_handle = ledr_task_handle;
-	  HAL_GPIO_WritePin(GPIOD, LED_ORANGE_PIN, GPIO_PIN_SET);
-	  SEGGER_SYSVIEW_PrintfTarget("Delete orange LED task");
-	  portEXIT_CRITICAL();
-	  vTaskDelete(NULL);
-	}
-  }
-}
-
-static void led_red_handler(void* parameters)
-{
-  BaseType_t status;
-  while (1)
-  {
-	SEGGER_SYSVIEW_PrintfTarget("Toggling red LED");
+//	SEGGER_SYSVIEW_PrintfTarget("Toggling green LED");
 	HAL_GPIO_TogglePin(GPIOD, LED_RED_PIN);
-	status = xTaskNotifyWait(0, 0, NULL, pdMS_TO_TICKS(400)); // 400ms
+	HAL_Delay(100);
+	switch_priority();
+  }
+}
 
-	if (status == pdTRUE)
-	{
-	  portENTER_CRITICAL();
-	  next_task_handle = NULL;
-	  HAL_GPIO_WritePin(GPIOD, LED_RED_PIN, GPIO_PIN_SET);
-	  SEGGER_SYSVIEW_PrintfTarget("Delete red LED task");
-	  portEXIT_CRITICAL();
-	  vTaskDelete(NULL);
-	}
+static void task2_handler(void* parameters)
+{
+  while (1)
+  {
+//	SEGGER_SYSVIEW_PrintfTarget("Toggling red LED");
+	HAL_GPIO_TogglePin(GPIOD, LED_GREEN_PIN);
+	HAL_Delay(1000);
+	switch_priority();
   }
 }
 
