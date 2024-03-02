@@ -55,7 +55,7 @@ BaseType_t xTaskNotifyFromISR( TaskHandle_t xTaskToNotify,
 <img src="images/trace.png" alt="SysView trace of the project 06_led_btn_isr" title="SysView trace of the project 06_led_btn_isr"> 	 
      
        		    		 		 
-When you inspect the above trace, where button was pressed and ISR22 runs for 13.5us. Meanwhile ISR22 notify the `LED green` Task and `LED green` Task comes into _Task Ready_ state. However ISR22 returns to IDLE task which is lower priority. Whereas it should return to High priority Task `LED green` which was in Task Ready state. The reason being is not using `pxHigherPriorityTaskWoken` (Keeping it NULL) and neither in `portYIELD_FROM_ISR()` (Once the ISR exits, the `portYIELD_FROM_ISR()` macro makes the higher priority task which got unblocked to resume on the CPU). 									
+When you inspect the above trace, where button was pressed and ISR22 runs for 13.5us. Meanwhile ISR22 notify the `LED green` Task and `LED green` Task comes into _Task Ready_ state. However ISR22 returns to IDLE task which is lower priority. Whereas it should return to High priority Task `LED green` which was in Task Ready state. The reason being is not using `pxHigherPriorityTaskWoken` (Keeping it NULL) and neither in **portYIELD_FROM_ISR()** (Once the ISR exits, the `portYIELD_FROM_ISR()` macro makes the higher priority task which got unblocked to resume on the CPU). 									
 						 
 > **pxHigherPriorityTaskWoken** _*pxHigherPriorityTaskWoken_ must be initialised to 0. 
 > xTaskNotifyFromISR() will set *pxHigherPriorityTaskWoken to pdTRUE if sending the notification caused a task to unblock, and the unblocked task has a priority higher than the currently running task.
