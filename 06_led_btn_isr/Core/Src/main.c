@@ -361,7 +361,7 @@ static void led_green_handler(void* parameters)
 
 	if (status == pdTRUE)
 	{
-	  // cannot use `vTaskSuspendAll()` here now as `next_task_hanle` is shared
+	  // cannot use `vTaskSuspendAll()` here now as `next_task_handle` is shared
 	  //   between Interrupt handler `button_interrupt_handler(void)`
 	  //
 	  // whenever you have a critical section (i.e. where global variable is accessed
