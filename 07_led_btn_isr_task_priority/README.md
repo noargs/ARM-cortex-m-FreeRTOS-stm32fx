@@ -23,8 +23,13 @@ When the user button is pressed, the priority of both the tasks should be exchan
      
 		 
 <img src="images/prior5.png" alt="External Interrupt Mode with Falling edge trigger detection" title="External Interrupt Mode with Falling edge trigger detection">  		    
-     
-		 
+			
+			
+			
+
+## APIs used   
+    
+		
 > [**vTaskPrioritySet()**](https://www.freertos.org/a00129.html),  [**uxTaskPriorityGet()**](https://www.freertos.org/a00128.html), [**xTaskGetHandle()**](https://www.freertos.org/a00021.html#xTaskGetHandle),    [**xTaskGetCurrentTaskHandle()**](https://www.freertos.org/a00021.html#xTaskGetCurrentTaskHandle) 
      
 		  
