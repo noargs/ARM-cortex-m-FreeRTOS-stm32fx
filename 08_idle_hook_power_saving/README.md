@@ -24,7 +24,7 @@ Let's assume that, there are no such a separate APIs. And if you use `xQueueSend
     
 Therefore if there are no a separate APIs for Task as well as Interrupt context, then a single API should implement that logic, differentiating between from which context it was called. Hence increases the code overhead, and some architecture does not support determining the context. To overcome this problem, FreeRTOS gives separate APIs to be called from interrupt handlers and prohibits using APIs which doesn't end with "FromISR" inside an interrupt handler.    
     		 	 
-**2. ome API function parameters would be redundant and confusing:**    
+**2. Some API function parameters would be redundant and confusing:**    
     
 ```
 xSemaphoreTake( SemaphoreHandle_t xSemaphore, TickType_t xTicksToWait );   
