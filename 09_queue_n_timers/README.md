@@ -92,7 +92,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 	
 	/* Enable UART data byte reception again in IT mode */
 }	  
-   
+     
+```   
    
 ## Command handling task   
     
@@ -100,9 +101,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
      
 2. process user entered data and convert it to a command    
      
-3. based on current state of the application, notify the relevant task.               
+3. based on current state of the application, notify the relevant task.    
      
-```
+
+```     
 void cmd_task_handler(void* parameter)
 {
   while (1)
