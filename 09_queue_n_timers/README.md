@@ -34,7 +34,11 @@ This application implements
    
 3. FreeRTOS software timers	 	 	 				
     
-* We use **Tera Term** on windows or **SerialTools** for MacOSX to send commands to over MCU over UART, select checkboxes for **LF** (Line Feed), **Local Echo**, and Baud Rate as **115200**, Parity **none**, Bits **8**, and lastly Stop Bits **1**.		
+* We use **Tera Term** on windows or **SerialTools** for MacOSX to send commands to over MCU over UART, select checkboxes for **LF** (Line Feed), **Local Echo**, and Baud Rate as **115200**, Parity **none**, Bits **8**, and lastly Stop Bits **1**.     
+    
+* We will use software timers `configUSE_TIMERS 1`, USART2 to send/receive command, hence we will not use SEGGER SystemView (Continous recording), or you can use Single shot recording, or use different USART peripheral for Continous recording.    
+     
+* USART2 priority must be greate than 5 (least priority, urgency), we will keep it 6     
      
 		 
 ### Application layout      	
