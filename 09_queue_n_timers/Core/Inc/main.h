@@ -54,6 +54,12 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
+void menu_task_handler(void* param);
+void led_task_handler(void* param);
+void rtc_task_handler(void* param);
+void print_task_handler(void* param);
+void cmd_task_handler(void* param);
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
