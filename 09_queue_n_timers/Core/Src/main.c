@@ -21,9 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,12 +49,14 @@ xTaskHandle handle_cmd_task;
 xTaskHandle handle_menu_task;
 xTaskHandle handle_print_task;
 xTaskHandle handle_led_task;
-xTaskHanlde handle_rtc_task;
+xTaskHandle handle_rtc_task;
 
 QueueHandle_t q_data;
 QueueHandle_t q_print;
 
 volatile uint8_t user_data;
+
+state_t curr_state = sMainMenu;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/

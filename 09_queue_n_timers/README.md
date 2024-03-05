@@ -38,10 +38,10 @@ This application implements
     
 * We will use software timers `configUSE_TIMERS 1`, USART2 to send/receive command, hence we will not use SEGGER SystemView (Continous recording), or you can use Single shot recording, or use different USART peripheral for Continous recording.    
      
-* USART2 priority must be greate than 5 (least priority, urgency), we will keep it 6     
+* USART2 priority must be greater than 5 (least priority, urgency), we will keep it 6     
      
 		 
-### Application layout     
+## Application layout     
     
      	
      
@@ -62,7 +62,7 @@ status = xTaskCreate(menu_task, "menu_task", 250, NULL, 2, &handle_menu_task);
 <img src="images/app_layout2.png" alt="How the application layout look like" title="How the application layout look like">		
     
     
-### Receiving data from user       
+## Receiving data from user       
     
 <img src="images/app_layout3.png" alt="How the application layout look like" title="How the application layout look like">		   
      
