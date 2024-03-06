@@ -139,7 +139,19 @@ typedef enum
   sRtcDateConfig,
   sRtcReport,
 }state_t;      
-```       
+```   
+     
+     
+## Menu handling task     
+     
+Whenever the application runs (and scheduler is being launched), the application should print the main menu to the user    	
+    
+<img src="images/main_menu.png" alt="Main menu handling task role" title="Main menu handling task role">		
+    
+      
+          
+    
+       
      
      
      
