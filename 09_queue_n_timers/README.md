@@ -146,14 +146,33 @@ typedef enum
      
 Whenever the application runs (and scheduler is being launched), the application should print the main menu to the user    	
     
-<img src="images/main_menu.png" alt="Main menu handling task role" title="Main menu handling task role">		
+<img src="images/main_menu.png" alt="Main menu handling task role" title="Main menu handling task role">     
      
+```
+  const char* msg_menu = "========================\n"
+	                     "|          Menu        |\n"
+	                     "========================\n"
+	                     "LED effect    ----> 0 \n"
+	                     "Date and time ----> 1 \n"
+	                     "Exit          ----> 2 \n"
+	                     "Enter your choice here: ";
+```    
+	                          		     
      
 ## LED handling task     
      
 The LED task creates some effects on 4 LEDs of the board.     
     
 <img src="images/led_task.png" alt="LED handling task role" title="LED handling task role">		
+     
+```
+  const char* msg_led = "========================\n"
+                        "|      LED Effect      |\n"
+                        "========================\n"
+                        "(none,e1,e2,e3,e4)\n"
+                        "Enter your choice here: ";
+```    
+	                          		     
     
 <img src="images/led_task2.png" alt="LED handling task role" title="LED handling task role">		
      
