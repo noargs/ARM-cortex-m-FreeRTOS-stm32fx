@@ -31,6 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
@@ -88,6 +89,9 @@ void led_task_handler(void* param);
 void rtc_task_handler(void* param);
 void print_task_handler(void* param);
 void cmd_task_handler(void* param);
+
+void led_effect_stop(void);
+void led_effect(int n);
 
 /* USER CODE END EFP */
 
@@ -163,6 +167,11 @@ void cmd_task_handler(void* param);
 #define LED_GREEN_PIN        LD4_Pin
 #define LED_ORANGE_PIN       LD3_Pin
 #define LED_RED_PIN          LD5_Pin
+
+#define LED1                 LD4_Pin
+#define LED2                 LD3_Pin
+#define LED3                 LD5_Pin
+#define LED4                 LD6_Pin
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

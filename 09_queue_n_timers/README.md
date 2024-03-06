@@ -147,6 +147,19 @@ typedef enum
 Whenever the application runs (and scheduler is being launched), the application should print the main menu to the user    	
     
 <img src="images/main_menu.png" alt="Main menu handling task role" title="Main menu handling task role">		
+     
+     
+## LED handling task     
+     
+The LED task creates some effects on 4 LEDs of the board.     
+    
+<img src="images/led_task.png" alt="LED handling task role" title="LED handling task role">		
+    
+<img src="images/led_task2.png" alt="LED handling task role" title="LED handling task role">		
+     
+     
+     
+     
     
       
           

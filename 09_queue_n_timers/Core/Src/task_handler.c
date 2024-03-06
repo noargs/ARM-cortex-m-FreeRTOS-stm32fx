@@ -58,9 +58,52 @@ void menu_task_handler(void* param)
 
 void led_task_handler(void* param)
 {
+  uint32_t cmd_addr;
+  command_t* cmd;
+  const char* msg_led = "========================\n"
+                        "|      LED Effect      |\n"
+                        "========================\n"
+                        "(none,e1,e2,e3,e4)\n"
+                        "Enter your choice here: ";
   while (1)
   {
+	// wait for notification
+	xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
 
+	// print LED menu
+	xQueueSend(q_print, &msg_led, portMAX_DELAY);
+
+	// wait for LED commands
+	xTaskNotifyWait(0, 0, &cmd_addr, portMAX_DELAY);
+	cmd = (command_t*)cmd_addr;
+
+	if (cmd->len <= 4)
+	{
+	  if (!strcmp((char*)cmd->payload, "none"))
+		led_effect_stop();
+	  else if (! strcmp((char*)cmd->payload, "e1"))
+		led_effect(1);
+	  else if (! strcmp((char*)cmd->payload, "e2"))
+		led_effect(2);
+	  else if (!strcmp((char*)cmd->payload, "e3"))
+		led_effect(3);
+	  else if (!strcmp((char*)cmd->payload, "e4"))
+		led_effect(4);
+	  else
+		// print invalid message
+		xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
+	}
+	else
+	{
+	  // print invalid message
+	  xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
+
+	  // update state variable
+	  curr_state = sMainMenu;
+
+	  // notify menu task
+	  xTaskNotify(handle_menu_task, 0, eNoAction);
+	}
   }
 }
 
