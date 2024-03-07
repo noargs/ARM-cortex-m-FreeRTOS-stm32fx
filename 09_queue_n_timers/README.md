@@ -175,6 +175,9 @@ The LED task creates some effects on 4 LEDs of the board.
 	                          		     
     
 <img src="images/led_task2.png" alt="LED handling task role" title="LED handling task role">		
+    
+		
+<img src="images/timers.png" alt="Software vs Hardware Timers" title="Software vs Hardware Timers">			
      
      
      
