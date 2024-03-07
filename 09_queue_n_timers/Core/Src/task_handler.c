@@ -299,11 +299,32 @@ void rtc_task_handler(void* param)
 
 		break;}
 
-	  case sRtcReport:
-	  {
+	  case sRtcReport: {
 		// enable or disable RTC current time reporting over ITM printf
-		break;
-	  }
+		if (cmd->len == 1)
+		{
+		  if (cmd->payload[0] = 'y')
+		  {
+			if (xTimerIsTimerActive(rtc_timer) == pdFALSE)
+			  xTimerStart(rtc_timer, portMAX_DELAY);
+		  }
+		  else if (cmd->payload[0] == 'n')
+		  {
+			xTimerStop(rtc_timer, portMAX_DELAY);
+		  }
+		  else
+		  {
+			xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
+		  }
+		}
+		else
+		{
+		  xQueueSend(q_print, &msg_invalid, portMAX_DELAY);
+		}
+
+		curr_state = sMainMenu;
+		break;}
+
 	  } // end switch
 	} // end while
 

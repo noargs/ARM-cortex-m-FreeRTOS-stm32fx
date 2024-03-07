@@ -73,6 +73,8 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 void led_effect_callback(TimerHandle_t xTimer);
+void rtc_report_callback(TimerHandle_t xTimer);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -413,6 +415,10 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void rtc_report_callback(TimerHandle_t xTimer)
+{
+  show_time_date_itm();
+}
 
 void led_effect_callback(TimerHandle_t xTimer)
 {

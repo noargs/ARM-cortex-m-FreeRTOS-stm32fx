@@ -1,5 +1,32 @@
 #include "main.h"
 
+void show_time_date_itm(void)
+{
+  static char showtime[40];
+  static char showdate[40];
+
+  RTC_DateTypeDef rtc_date;
+  RTC_TimeTypeDef rtc_time;
+
+  static char* time = showtime;
+  static char* date = showdate;
+
+  memset(&rtc_date, 0, sizeof(rtc_date));
+  memset(&rtc_time, 0, sizeof(rtc_time));
+
+  // Get the RTC current time
+  HAL_RTC_GetTime(&hrtc, &rtc_time, RTC_FORMAT_BIN);
+
+  // Get the RTC current date
+  HAL_RTC_GetDate(&hrtc, &rtc_date, RTC_FORMAT_BIN);
+
+  char* format;
+  format = (rtc_time.TimeFormat == RTC_HOURFORMAT12_AM) ? "AM" : "PM";
+
+  printf("%02d:%02d:%02d [%s]", rtc_time.Hours, rtc_time.Minutes, rtc_time.Second, format);
+  printf("\t%02d-%02d-%02d\n", rtc_date.Month, rtc_date.Date, 2000 + rtc_date.Year);
+}
+
 void show_time_date(void)
 {
   static char showtime[40];
