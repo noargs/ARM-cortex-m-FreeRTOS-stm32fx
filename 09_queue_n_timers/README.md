@@ -178,6 +178,29 @@ The LED task creates some effects on 4 LEDs of the board.
     
 		
 <img src="images/timers.png" alt="Software vs Hardware Timers" title="Software vs Hardware Timers">			
+	                          		     
+     
+## RTC handling task     
+    
+Implementing RTC task   
+     
+1. Configuring date and time information
+2. Reading date and time information (and show over UART/ITM)		
+     
+		 
+```
+  const char* msg_rtc1 = "========================\n"
+	                       "|         RTC          |\n"
+	                       "========================\n";
+
+  const char* msg_rtc2 = "Configure Time            ----> 0\n"
+	                       "Configure Date            ----> 1\n"
+	                       "Enable reporting          ----> 2\n"
+	                       "Exit                      ----> 3\n"
+	                       "Enter your choice here : ";
+```    
+	                          		     
+     
      
      
      
