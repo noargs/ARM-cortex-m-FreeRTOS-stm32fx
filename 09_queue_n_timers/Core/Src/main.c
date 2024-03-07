@@ -54,6 +54,12 @@ xTaskHandle handle_rtc_task;
 QueueHandle_t q_data;
 QueueHandle_t q_print;
 
+
+
+// Software timer handle
+TimerHandle_t handle_led_timer[4];
+TimerHandle_t rtc_timer;
+
 volatile uint8_t user_data;
 
 state_t curr_state = sMainMenu;
@@ -66,6 +72,7 @@ static void MX_RTC_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
+void led_effect_callback(TimerHandle_t xTimer);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -127,7 +134,11 @@ int main(void)
   configASSERT(q_print != NULL);
 
 
-  HAL_UART_Receive_IT(&huart2, &user_data, 1);
+  // create software timers for LED effects
+  for (int i=0; i<4; i++)
+	handle_led_timer[i] = xTimerCreate("led_timer", pdMS_TO_TICKS(500), pdTRUE, (void*)(i+1), led_effect_callback);
+
+  HAL_UART_Receive_IT(&huart2, (uint8_t*)&user_data, 1);
 
   vTaskStartScheduler();
 
@@ -402,14 +413,39 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void led_effect_callback(TimerHandle_t xTimer)
+{
+  int id;
+  id  = (uint32_t)pvTimerGetTimerID(xTimer);
+  switch (id)
+  {
+  case 1:
+	LED_effect1();
+	break;
+  case 2:
+	LED_effect2();
+	break;
+  case 3:
+	LED_effect3();
+	break;
+  case 4:
+	LED_effect4();
+  }
+}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 {
   uint8_t dummy;
+
+  for (uint32_t i=0; i<4000; i++);
 
   if (! xQueueIsQueueFullFromISR(q_data))
   {
 	/* Queue is not full, Enqueue the data byte */
 	xQueueSendFromISR(q_data, (void*)&user_data, NULL);
+//	xQueueSendToBackFromISR(q_data, (void*)&user_data, NULL);
+//	HAL_UART_Receive_IT(&huart2, (uint8_t*)&user_data, 1);
   }
   else
   {

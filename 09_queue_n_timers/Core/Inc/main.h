@@ -35,6 +35,7 @@ extern "C" {
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
+#include "timers.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -66,6 +67,21 @@ extern QueueHandle_t q_data;
 extern QueueHandle_t q_print;
 
 extern state_t curr_state;
+
+extern TimerHandle_t handle_led_timer[4];
+
+extern UART_HandleTypeDef huart2;
+extern RTC_HandleTypeDef hrtc;
+
+void LED_effect1(void);
+void LED_effect2(void);
+void LED_effect3(void);
+void LED_effect4(void);
+
+void show_time_date(void);
+void rtc_configure_time(RTC_TimeTypeDef* time);
+void rtc_configure_date(RTC_DateTypeDef* date);
+int validate_rtc_information(RTC_TimeTypeDef* time, RTC_DateTypeDef* date);
 
 /* USER CODE END ET */
 
@@ -164,9 +180,6 @@ void led_effect(int n);
 #define MEMS_INT2_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
-#define LED_GREEN_PIN        LD4_Pin
-#define LED_ORANGE_PIN       LD3_Pin
-#define LED_RED_PIN          LD5_Pin
 
 #define LED1                 LD4_Pin
 #define LED2                 LD3_Pin
