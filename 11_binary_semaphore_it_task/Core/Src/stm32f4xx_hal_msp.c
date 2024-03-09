@@ -20,9 +20,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "FreeRTOS.h"
 
 /* USER CODE BEGIN Includes */
+#include "FreeRTOS.h"
 
 /* USER CODE END Includes */
 
