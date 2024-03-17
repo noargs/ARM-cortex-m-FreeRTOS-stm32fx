@@ -53,7 +53,7 @@ This application implements
    - 5 User tasks (same priority for all tasks)
    - 2 Queues (Inpur data queue and Print queue)     
 	    
-```
+```c
 status = xTaskCreate(menu_task, "menu_task", 250, NULL, 2, &handle_menu_task);
 ```		     	
     
@@ -72,7 +72,7 @@ status = xTaskCreate(menu_task, "menu_task", 250, NULL, 2, &handle_menu_task);
   * When `\n` is detected, notify the command handling task `cmd_task_handler`    
       
       
-```
+```c
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 {
 	if ( /* check: id queue full ? */) 
@@ -104,7 +104,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 3. based on current state of the application, notify the relevant task.    
      
 
-```     
+```c     
 void cmd_task_handler(void* parameter)
 {
   while (1)
@@ -129,7 +129,7 @@ typedef struct
    
 We need to introduce a state variable `state_t` to keep track of which menu the user is in.   
    
-```
+```c
 typedef enum
 {
   sMainMenu =0,
@@ -148,7 +148,7 @@ Whenever the application runs (and scheduler is being launched), the application
     
 <img src="images/main_menu.png" alt="Main menu handling task role" title="Main menu handling task role">     
      
-```
+```c
   const char* msg_menu = "========================\n"
 	                     "|          Menu        |\n"
 	                     "========================\n"
@@ -165,7 +165,7 @@ The LED task creates some effects on 4 LEDs of the board.
     
 <img src="images/led_task.png" alt="LED handling task role" title="LED handling task role">		
      
-```
+```c
   const char* msg_led = "========================\n"
                         "|      LED Effect      |\n"
                         "========================\n"
@@ -188,7 +188,7 @@ Implementing RTC task
 2. Reading date and time information (and show over UART/ITM)		
      
 		 
-```
+```c
   const char* msg_rtc1 = "========================\n"
 	                       "|         RTC          |\n"
 	                       "========================\n";
